@@ -193,6 +193,42 @@
       ></script>
       <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
       <script src="https://lyzr-chatbot-assets.s3.amazonaws.com/script.js"></script>
+      <script>
+        function transfer() {
+          const url = "";
+          const headers = {
+            accept: "application/json",
+            "ASSUME-IDENTITY": "false",
+            "Content-Type": "application/json",
+            Authorization: "Bearer ",
+          };
+          const body = {
+            message_parts: [
+              {
+                text: {
+                  content: "",
+                },
+              },
+            ],
+
+            message_type: "normal",
+            actor_type: "agent",
+            user_id: "",
+            actor_id: "",
+          };
+
+          fetch(url, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(body),
+          })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        }
+      </script>
     </div>
   </body>
 </html>
