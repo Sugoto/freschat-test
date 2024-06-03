@@ -195,33 +195,55 @@
       <script src="https://lyzr-chatbot-assets.s3.amazonaws.com/script.js"></script>
       <script>
         function transfer() {
-          const url = "";
-          const headers = {
-            accept: "application/json",
-            "ASSUME-IDENTITY": "false",
-            "Content-Type": "application/json",
-            Authorization: "Bearer ",
-          };
-          const body = {
-            message_parts: [
-              {
-                text: {
-                  content: "",
-                },
+          console.log("Transfering chat to agent...");
+          console.log("Creating a new conversation...");
+
+          fetch(
+            "https://lyzr-team-9edf77b814f088617169425.freshchat.com/v2/conversations/",
+            {
+              method: "POST",
+              headers: {
+                accept: "application/json",
+                "content-type": "application/JSON",
+                Authorization:
+                  "Bearer eyJraWQiOiJjdXN0b20tb2F1dGgta2V5aWQiLCJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmcmVzaGNoYXQiLCJzdWIiOiIwYWQ0NGNjOS1jN2M4LTQ2YjUtYTUwMS01YWViYWYwNzFmODciLCJjbGllbnRJZCI6ImZjLWFlMGY5OTk3LWI2OWEtNDNiNi1iZWVlLWZiY2FkNzI2YTIzMiIsInNjb3BlIjoiYWdlbnQ6cmVhZCBhZ2VudDpjcmVhdGUgYWdlbnQ6dXBkYXRlIGFnZW50OmRlbGV0ZSBjb252ZXJzYXRpb246Y3JlYXRlIGNvbnZlcnNhdGlvbjpyZWFkIGNvbnZlcnNhdGlvbjp1cGRhdGUgbWVzc2FnZTpjcmVhdGUgbWVzc2FnZTpnZXQgYmlsbGluZzp1cGRhdGUgcmVwb3J0czpmZXRjaCByZXBvcnRzOmV4dHJhY3QgcmVwb3J0czpyZWFkIHJlcG9ydHM6ZXh0cmFjdDpyZWFkIGFjY291bnQ6cmVhZCBkYXNoYm9hcmQ6cmVhZCB1c2VyOnJlYWQgdXNlcjpjcmVhdGUgdXNlcjp1cGRhdGUgdXNlcjpkZWxldGUgb3V0Ym91bmRtZXNzYWdlOnNlbmQgb3V0Ym91bmRtZXNzYWdlOmdldCBtZXNzYWdpbmctY2hhbm5lbHM6bWVzc2FnZTpzZW5kIG1lc3NhZ2luZy1jaGFubmVsczptZXNzYWdlOmdldCBtZXNzYWdpbmctY2hhbm5lbHM6dGVtcGxhdGU6Y3JlYXRlIG1lc3NhZ2luZy1jaGFubmVsczp0ZW1wbGF0ZTpnZXQgZmlsdGVyaW5ib3g6cmVhZCBmaWx0ZXJpbmJveDpjb3VudDpyZWFkIHJvbGU6cmVhZCBpbWFnZTp1cGxvYWQiLCJpc3MiOiJmcmVzaGNoYXQiLCJ0eXAiOiJCZWFyZXIiLCJleHAiOjIwMzI0ODUzNjQsImlhdCI6MTcxNjk1MjU2NCwianRpIjoiZTU3NTUzZjItN2ZmNC00YTdmLWExOGItMDVlYzkyYzcyMTcwIn0.Ijkrq4P1lWfzok4I41rhum5ohqwRz0Pc2XATgHufB0g",
               },
-            ],
 
-            message_type: "normal",
-            actor_type: "agent",
-            user_id: "",
-            actor_id: "",
-          };
-
-          fetch(url, {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(body),
-          })
+              body: JSON.stringify({
+                status: "new",
+                messages: [
+                  {
+                    message_parts: [
+                      {
+                        text: {
+                          content: "",
+                        },
+                      },
+                    ],
+                    channel_id: "",
+                    message_type: "normal",
+                    actor_type: "user",
+                    actor_id: "",
+                  },
+                ],
+                channel_id: "",
+                assigned_org_agent_id: "",
+                assigned_agent_id: "",
+                assigned_group_id: "",
+                properties: {
+                  priority: "Low",
+                  cf_type: "General Query",
+                  cf_rating: "3",
+                  cf_supported_products: ["Freshchat", "Freshdesk"],
+                },
+                users: [
+                  {
+                    id: "",
+                  },
+                ],
+              }),
+            }
+          )
             .then((response) => response.json())
             .then((data) => console.log(data))
             .catch((error) => {
